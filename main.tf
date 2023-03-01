@@ -79,6 +79,10 @@ resource "aws_codepipeline" "codepipeline" {
   }
 }
 
+resource "aws_s3_bucket" "b" {
+  bucket = "howdidthisgethere-mar01"
+}
+
 resource "aws_s3_bucket" "bucket" {
   bucket              = "develk.com"
   object_lock_enabled = false
