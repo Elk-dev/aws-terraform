@@ -1,5 +1,5 @@
 provider "aws" {
-  region     = "us-east-1"
+  region  = "us-east-1"
   profile = "ElkinH"
 }
 
@@ -39,7 +39,7 @@ resource "aws_codepipeline" "codepipeline" {
       version   = "1"
     }
   }
-  stage {
+  /* stage {
     name = "QA"
 
     action {
@@ -54,7 +54,7 @@ resource "aws_codepipeline" "codepipeline" {
       run_order        = 1
       version          = "1"
     }
-  }
+  } */
   stage {
     name = "Deploy"
 
@@ -182,7 +182,7 @@ resource "aws_cloudfront_distribution" "s3distribution" {
 
   restrictions {
     geo_restriction {
-      locations        = [
+      locations = [
         "US",
       ]
       restriction_type = "whitelist"
@@ -234,281 +234,281 @@ resource "aws_route53_record" "cname1" {
 }
 
 resource "aws_cloudwatch_metric_alarm" "site_health" {
-actions_enabled           = true
-    alarm_actions             = [
-        "arn:aws:sns:us-east-1:667259643039:WebsiteOffline",
-    ]
-    alarm_name                = "www-develk-com-awsroute53-7455b0c5-a0a2-40a5-abc1-ce0b1e7909f7-Low-HealthCheckStatus"
-    comparison_operator       = "LessThanThreshold"
-    dimensions                = {
-        "HealthCheckId" = "7455b0c5-a0a2-40a5-abc1-ce0b1e7909f7"
-    }
-    evaluation_periods        = 1
-    insufficient_data_actions = []
-    metric_name               = "HealthCheckStatus"
-    namespace                 = "AWS/Route53"
-    ok_actions                = []
-    period                    = 60
-    statistic                 = "Minimum"
-    tags                      = {}
-    tags_all                  = {}
-    threshold                 = 1
-    treat_missing_data        = "missing"
+  actions_enabled = true
+  alarm_actions = [
+    "arn:aws:sns:us-east-1:667259643039:WebsiteOffline",
+  ]
+  alarm_name          = "www-develk-com-awsroute53-7455b0c5-a0a2-40a5-abc1-ce0b1e7909f7-Low-HealthCheckStatus"
+  comparison_operator = "LessThanThreshold"
+  dimensions = {
+    "HealthCheckId" = "7455b0c5-a0a2-40a5-abc1-ce0b1e7909f7"
+  }
+  evaluation_periods        = 1
+  insufficient_data_actions = []
+  metric_name               = "HealthCheckStatus"
+  namespace                 = "AWS/Route53"
+  ok_actions                = []
+  period                    = 60
+  statistic                 = "Minimum"
+  tags                      = {}
+  tags_all                  = {}
+  threshold                 = 1
+  treat_missing_data        = "missing"
 }
 
 resource "aws_cloudwatch_metric_alarm" "houseErrors" {
-    actions_enabled           = true
-    alarm_actions             = [
-        "arn:aws:sns:us-east-1:667259643039:HueristicEinstein",
-    ]
-    alarm_description         = "The website is currently experiencing a high number of 500 errors. Check to make sure the website is working properly."
-    alarm_name                = "Too_Many_500_errors"
-    comparison_operator       = "GreaterThanOrEqualToThreshold"
-    datapoints_to_alarm       = 1
-    dimensions                = {
-        "DistributionId" = "E2TFXIOTCFMZSC"
-        "Region"         = "Global"
-    }
-    evaluation_periods        = 1
-    insufficient_data_actions = []
-    metric_name               = "5xxErrorRate"
-    namespace                 = "AWS/CloudFront"
-    ok_actions                = []
-    period                    = 300
-    statistic                 = "Average"
-    tags                      = {}
-    tags_all                  = {}
-    threshold                 = 5
-    treat_missing_data        = "missing"
+  actions_enabled = true
+  alarm_actions = [
+    "arn:aws:sns:us-east-1:667259643039:HueristicEinstein",
+  ]
+  alarm_description   = "The website is currently experiencing a high number of 500 errors. Check to make sure the website is working properly."
+  alarm_name          = "Too_Many_500_errors"
+  comparison_operator = "GreaterThanOrEqualToThreshold"
+  datapoints_to_alarm = 1
+  dimensions = {
+    "DistributionId" = "E2TFXIOTCFMZSC"
+    "Region"         = "Global"
+  }
+  evaluation_periods        = 1
+  insufficient_data_actions = []
+  metric_name               = "5xxErrorRate"
+  namespace                 = "AWS/CloudFront"
+  ok_actions                = []
+  period                    = 300
+  statistic                 = "Average"
+  tags                      = {}
+  tags_all                  = {}
+  threshold                 = 5
+  treat_missing_data        = "missing"
 }
 
 resource "aws_cloudwatch_metric_alarm" "clientErrors" {
-actions_enabled           = true
-    alarm_actions             = [
-        "arn:aws:sns:us-east-1:667259643039:HueristicEinstein",
-    ]
-    alarm_description         = "There are currently a large number of 400 errors linked to your web server."
-    alarm_name                = "Too_Many_400_Errors"
-    comparison_operator       = "GreaterThanThreshold"
-    datapoints_to_alarm       = 1
-    dimensions                = {
-        "DistributionId" = "E2TFXIOTCFMZSC"
-        "Region"         = "Global"
-    }
-    evaluation_periods        = 1
-    insufficient_data_actions = []
-    metric_name               = "4xxErrorRate"
-    namespace                 = "AWS/CloudFront"
-    ok_actions                = []
-    period                    = 300
-    statistic                 = "Average"
-    tags                      = {}
-    tags_all                  = {}
-    threshold                 = 50
-    treat_missing_data        = "missing"
+  actions_enabled = true
+  alarm_actions = [
+    "arn:aws:sns:us-east-1:667259643039:HueristicEinstein",
+  ]
+  alarm_description   = "There are currently a large number of 400 errors linked to your web server."
+  alarm_name          = "Too_Many_400_Errors"
+  comparison_operator = "GreaterThanThreshold"
+  datapoints_to_alarm = 1
+  dimensions = {
+    "DistributionId" = "E2TFXIOTCFMZSC"
+    "Region"         = "Global"
+  }
+  evaluation_periods        = 1
+  insufficient_data_actions = []
+  metric_name               = "4xxErrorRate"
+  namespace                 = "AWS/CloudFront"
+  ok_actions                = []
+  period                    = 300
+  statistic                 = "Average"
+  tags                      = {}
+  tags_all                  = {}
+  threshold                 = 50
+  treat_missing_data        = "missing"
 }
 
 resource "aws_cloudwatch_metric_alarm" "bill" {
-actions_enabled           = true
-    alarm_actions             = [
-        "arn:aws:sns:us-east-1:667259643039:HueristicEinstein",
-    ]
-    alarm_description         = "Your architecture is currently running at least $1 per day."
-    alarm_name                = "Exceeded_1_Dollar_Per_Day"
-    comparison_operator       = "GreaterThanOrEqualToThreshold"
-    datapoints_to_alarm       = 1
-    dimensions                = {
-        "Currency" = "USD"
-    }
-    evaluation_periods        = 1
-    insufficient_data_actions = []
-    metric_name               = "EstimatedCharges"
-    namespace                 = "AWS/Billing"
-    ok_actions                = []
-    period                    = 86400
-    statistic                 = "Maximum"
-    tags                      = {}
-    tags_all                  = {}
-    threshold                 = 1
-    treat_missing_data        = "missing"
+  actions_enabled = true
+  alarm_actions = [
+    "arn:aws:sns:us-east-1:667259643039:HueristicEinstein",
+  ]
+  alarm_description   = "Your architecture is currently running at least $1 per day."
+  alarm_name          = "Exceeded_1_Dollar_Per_Day"
+  comparison_operator = "GreaterThanOrEqualToThreshold"
+  datapoints_to_alarm = 1
+  dimensions = {
+    "Currency" = "USD"
+  }
+  evaluation_periods        = 1
+  insufficient_data_actions = []
+  metric_name               = "EstimatedCharges"
+  namespace                 = "AWS/Billing"
+  ok_actions                = []
+  period                    = 86400
+  statistic                 = "Maximum"
+  tags                      = {}
+  tags_all                  = {}
+  threshold                 = 1
+  treat_missing_data        = "missing"
 }
 
 resource "aws_acm_certificate" "cert" {
-    domain_name               = "develk.com"
-    key_algorithm             = "RSA_2048"
-    subject_alternative_names = [
-        "develk.com",
-        "www.develk.com",
-    ]
-    tags                      = {}
-    tags_all                  = {}
-    validation_method         = "DNS"
+  domain_name   = "develk.com"
+  key_algorithm = "RSA_2048"
+  subject_alternative_names = [
+    "develk.com",
+    "www.develk.com",
+  ]
+  tags              = {}
+  tags_all          = {}
+  validation_method = "DNS"
 
-    options {
-        certificate_transparency_logging_preference = "ENABLED"
-    }
+  options {
+    certificate_transparency_logging_preference = "ENABLED"
+  }
 }
 
 resource "aws_sns_topic" "user_updates" {
-application_success_feedback_sample_rate = 0
-    content_based_deduplication              = false
-    fifo_topic                               = false
-    firehose_success_feedback_sample_rate    = 0
-    http_success_feedback_sample_rate        = 0
-    lambda_success_feedback_sample_rate      = 0
-    name                                     = "HueristicEinstein"
-    policy                                   = jsonencode(
+  application_success_feedback_sample_rate = 0
+  content_based_deduplication              = false
+  fifo_topic                               = false
+  firehose_success_feedback_sample_rate    = 0
+  http_success_feedback_sample_rate        = 0
+  lambda_success_feedback_sample_rate      = 0
+  name                                     = "HueristicEinstein"
+  policy = jsonencode(
+    {
+      Id = "__default_policy_ID"
+      Statement = [
         {
-            Id        = "__default_policy_ID"
-            Statement = [
-                {
-                    Action    = [
-                        "SNS:Publish",
-                        "SNS:RemovePermission",
-                        "SNS:SetTopicAttributes",
-                        "SNS:DeleteTopic",
-                        "SNS:ListSubscriptionsByTopic",
-                        "SNS:GetTopicAttributes",
-                        "SNS:AddPermission",
-                        "SNS:Subscribe",
-                    ]
-                    Condition = {
-                        StringEquals = {
-                            "AWS:SourceOwner" = "667259643039"
-                        }
-                    }
-                    Effect    = "Allow"
-                    Principal = {
-                        AWS = "*"
-                    }
-                    Resource  = "arn:aws:sns:us-east-1:667259643039:HueristicEinstein"
-                    Sid       = "__default_statement_ID"
-                },
-                {
-                    Action    = "SNS:Publish"
-                    Effect    = "Allow"
-                    Principal = {
-                        AWS = "*"
-                    }
-                    Resource  = "arn:aws:sns:us-east-1:667259643039:HueristicEinstein"
-                    Sid       = "__console_pub_0"
-                },
-                {
-                    Action    = "SNS:Subscribe"
-                    Effect    = "Allow"
-                    Principal = {
-                        AWS = "*"
-                    }
-                    Resource  = "arn:aws:sns:us-east-1:667259643039:HueristicEinstein"
-                    Sid       = "__console_sub_0"
-                },
-                {
-                    Action    = "sns:Publish"
-                    Effect    = "Allow"
-                    Principal = {
-                        Service = "events.amazonaws.com"
-                    }
-                    Resource  = "arn:aws:sns:us-east-1:667259643039:HueristicEinstein"
-                    Sid       = "AWSEvents_Pipeline_Failure_Id28260783-1f12-4e3c-b9ac-b3212ab8119b"
-                },
-            ]
-            Version   = "2008-10-17"
-        }
-    )
-    sqs_success_feedback_sample_rate         = 0
-    tags                                     = {}
-    tags_all                                 = {}
-    tracing_config                           = "PassThrough"
+          Action = [
+            "SNS:Publish",
+            "SNS:RemovePermission",
+            "SNS:SetTopicAttributes",
+            "SNS:DeleteTopic",
+            "SNS:ListSubscriptionsByTopic",
+            "SNS:GetTopicAttributes",
+            "SNS:AddPermission",
+            "SNS:Subscribe",
+          ]
+          Condition = {
+            StringEquals = {
+              "AWS:SourceOwner" = "667259643039"
+            }
+          }
+          Effect = "Allow"
+          Principal = {
+            AWS = "*"
+          }
+          Resource = "arn:aws:sns:us-east-1:667259643039:HueristicEinstein"
+          Sid      = "__default_statement_ID"
+        },
+        {
+          Action = "SNS:Publish"
+          Effect = "Allow"
+          Principal = {
+            AWS = "*"
+          }
+          Resource = "arn:aws:sns:us-east-1:667259643039:HueristicEinstein"
+          Sid      = "__console_pub_0"
+        },
+        {
+          Action = "SNS:Subscribe"
+          Effect = "Allow"
+          Principal = {
+            AWS = "*"
+          }
+          Resource = "arn:aws:sns:us-east-1:667259643039:HueristicEinstein"
+          Sid      = "__console_sub_0"
+        },
+        {
+          Action = "sns:Publish"
+          Effect = "Allow"
+          Principal = {
+            Service = "events.amazonaws.com"
+          }
+          Resource = "arn:aws:sns:us-east-1:667259643039:HueristicEinstein"
+          Sid      = "AWSEvents_Pipeline_Failure_Id28260783-1f12-4e3c-b9ac-b3212ab8119b"
+        },
+      ]
+      Version = "2008-10-17"
+    }
+  )
+  sqs_success_feedback_sample_rate = 0
+  tags                             = {}
+  tags_all                         = {}
+  tracing_config                   = "PassThrough"
 }
 
 resource "aws_sns_topic" "site_down" {
-    application_success_feedback_sample_rate = 0
-    content_based_deduplication              = false
-    fifo_topic                               = false
-    firehose_success_feedback_sample_rate    = 0
-    http_success_feedback_sample_rate        = 0
-    lambda_success_feedback_sample_rate      = 0
-    name                                     = "Website_Offline_TEST"
-    policy                                   = jsonencode(
+  application_success_feedback_sample_rate = 0
+  content_based_deduplication              = false
+  fifo_topic                               = false
+  firehose_success_feedback_sample_rate    = 0
+  http_success_feedback_sample_rate        = 0
+  lambda_success_feedback_sample_rate      = 0
+  name                                     = "Website_Offline_TEST"
+  policy = jsonencode(
+    {
+      Id = "__default_policy_ID"
+      Statement = [
         {
-            Id        = "__default_policy_ID"
-            Statement = [
-                {
-                    Action    = [
-                        "SNS:GetTopicAttributes",
-                        "SNS:SetTopicAttributes",
-                        "SNS:AddPermission",
-                        "SNS:RemovePermission",
-                        "SNS:DeleteTopic",
-                        "SNS:Subscribe",
-                        "SNS:ListSubscriptionsByTopic",
-                        "SNS:Publish",
-                    ]
-                    Condition = {
-                        StringEquals = {
-                            "AWS:SourceOwner" = "667259643039"
-                        }
-                    }
-                    Effect    = "Allow"
-                    Principal = {
-                        AWS = "*"
-                    }
-                    Resource  = "arn:aws:sns:us-east-1:667259643039:Website_Offline_TEST"
-                    Sid       = "__default_statement_ID"
-                },
-            ]
-            Version   = "2008-10-17"
-        }
-    )
-    sqs_success_feedback_sample_rate         = 0
-    tags                                     = {}
-    tags_all                                 = {}
+          Action = [
+            "SNS:GetTopicAttributes",
+            "SNS:SetTopicAttributes",
+            "SNS:AddPermission",
+            "SNS:RemovePermission",
+            "SNS:DeleteTopic",
+            "SNS:Subscribe",
+            "SNS:ListSubscriptionsByTopic",
+            "SNS:Publish",
+          ]
+          Condition = {
+            StringEquals = {
+              "AWS:SourceOwner" = "667259643039"
+            }
+          }
+          Effect = "Allow"
+          Principal = {
+            AWS = "*"
+          }
+          Resource = "arn:aws:sns:us-east-1:667259643039:Website_Offline_TEST"
+          Sid      = "__default_statement_ID"
+        },
+      ]
+      Version = "2008-10-17"
+    }
+  )
+  sqs_success_feedback_sample_rate = 0
+  tags                             = {}
+  tags_all                         = {}
 }
 
 resource "aws_sns_topic" "siteTest" {
-    application_success_feedback_sample_rate = 0
-    content_based_deduplication              = false
-    fifo_topic                               = false
-    firehose_success_feedback_sample_rate    = 0
-    http_success_feedback_sample_rate        = 0
-    lambda_success_feedback_sample_rate      = 0
-    name                                     = "TerraformDummy"
-    policy                                   = jsonencode(
+  application_success_feedback_sample_rate = 0
+  content_based_deduplication              = false
+  fifo_topic                               = false
+  firehose_success_feedback_sample_rate    = 0
+  http_success_feedback_sample_rate        = 0
+  lambda_success_feedback_sample_rate      = 0
+  name                                     = "TerraformDummy"
+  policy = jsonencode(
+    {
+      Id = "__default_policy_ID"
+      Statement = [
         {
-            Id        = "__default_policy_ID"
-            Statement = [
-                {
-                    Action    = [
-                        "SNS:GetTopicAttributes",
-                        "SNS:SetTopicAttributes",
-                        "SNS:AddPermission",
-                        "SNS:RemovePermission",
-                        "SNS:DeleteTopic",
-                        "SNS:Subscribe",
-                        "SNS:ListSubscriptionsByTopic",
-                        "SNS:Publish",
-                    ]
-                    Condition = {
-                        StringEquals = {
-                            "AWS:SourceOwner" = "667259643039"
-                        }
-                    }
-                    Effect    = "Allow"
-                    Principal = {
-                        AWS = "*"
-                    }
-                    Resource  = "arn:aws:sns:us-east-1:667259643039:Website_Offline_TEST"
-                    Sid       = "__default_statement_ID"
-                },
-            ]
-            Version   = "2008-10-17"
-        }
-    )
-    sqs_success_feedback_sample_rate         = 0
-    tags                                     = {
-      "terraform" = "true"
+          Action = [
+            "SNS:GetTopicAttributes",
+            "SNS:SetTopicAttributes",
+            "SNS:AddPermission",
+            "SNS:RemovePermission",
+            "SNS:DeleteTopic",
+            "SNS:Subscribe",
+            "SNS:ListSubscriptionsByTopic",
+            "SNS:Publish",
+          ]
+          Condition = {
+            StringEquals = {
+              "AWS:SourceOwner" = "667259643039"
+            }
+          }
+          Effect = "Allow"
+          Principal = {
+            AWS = "*"
+          }
+          Resource = "arn:aws:sns:us-east-1:667259643039:Website_Offline_TEST"
+          Sid      = "__default_statement_ID"
+        },
+      ]
+      Version = "2008-10-17"
     }
-    tags_all                                 = {
-      "terraform" = "true"
-    }
+  )
+  sqs_success_feedback_sample_rate = 0
+  tags = {
+    "terraform" = "true"
+  }
+  tags_all = {
+    "terraform" = "true"
+  }
 }
