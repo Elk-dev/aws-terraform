@@ -465,3 +465,50 @@ resource "aws_sns_topic" "site_down" {
   tags_all                         = {}
 }
 
+resource "aws_sns_topic" "siteTest" {
+  application_success_feedback_sample_rate = 0
+  content_based_deduplication              = false
+  fifo_topic                               = false
+  firehose_success_feedback_sample_rate    = 0
+  http_success_feedback_sample_rate        = 0
+  lambda_success_feedback_sample_rate      = 0
+  name                                     = "TerraformDummy"
+  policy = jsonencode(
+    {
+      Id = "__default_policy_ID"
+      Statement = [
+        {
+          Action = [
+            "SNS:GetTopicAttributes",
+            "SNS:SetTopicAttributes",
+            "SNS:AddPermission",
+            "SNS:RemovePermission",
+            "SNS:DeleteTopic",
+            "SNS:Subscribe",
+            "SNS:ListSubscriptionsByTopic",
+            "SNS:Publish",
+          ]
+          Condition = {
+            StringEquals = {
+              "AWS:SourceOwner" = "667259643039"
+            }
+          }
+          Effect = "Allow"
+          Principal = {
+            AWS = "*"
+          }
+          Resource = "arn:aws:sns:us-east-1:667259643039:Website_Offline_TEST"
+          Sid      = "__default_statement_ID"
+        },
+      ]
+      Version = "2008-10-17"
+    }
+  )
+  sqs_success_feedback_sample_rate = 0
+  tags = {
+    "terraform" = "true"
+  }
+  tags_all = {
+    "terraform" = "true"
+  }
+}
