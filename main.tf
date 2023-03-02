@@ -140,7 +140,7 @@ resource "aws_cloudfront_distribution" "s3distribution" {
     "www.develk.com",
   ]
   default_root_object = "index.html"
-  enabled             = false
+  enabled             = true
   http_version        = "http2"
   is_ipv6_enabled     = true
   price_class         = "PriceClass_All"
@@ -233,15 +233,15 @@ resource "aws_route53_record" "cname1" {
   zone_id = "Z069698134XUC0JQKN3FU"
 }
 
-resource "aws_cloudwatch_metric_alarm" "down_site" {
+resource "aws_cloudwatch_metric_alarm" "site_health" {
 actions_enabled           = true
     alarm_actions             = [
-        "arn:aws:sns:us-east-1:667259643039:Website_Offline_TEST",
+        "arn:aws:sns:us-east-1:667259643039:WebsiteOffline",
     ]
-    alarm_name                = "www-develk-com-awsroute53-6b466650-8c7c-43d6-9a25-28bcbccb8154-Low-HealthCheckStatus"
+    alarm_name                = "www-develk-com-awsroute53-7455b0c5-a0a2-40a5-abc1-ce0b1e7909f7-Low-HealthCheckStatus"
     comparison_operator       = "LessThanThreshold"
     dimensions                = {
-        "HealthCheckId" = "6b466650-8c7c-43d6-9a25-28bcbccb8154"
+        "HealthCheckId" = "7455b0c5-a0a2-40a5-abc1-ce0b1e7909f7"
     }
     evaluation_periods        = 1
     insufficient_data_actions = []
