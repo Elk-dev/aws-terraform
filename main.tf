@@ -464,4 +464,3 @@ resource "aws_sns_topic" "site_down" {
     tags                                     = {}
     tags_all                                 = {}
 }
-
