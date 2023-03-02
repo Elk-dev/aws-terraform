@@ -505,6 +505,10 @@ resource "aws_sns_topic" "siteTest" {
         }
     )
     sqs_success_feedback_sample_rate         = 0
-    tags                                     = {}
-    tags_all                                 = {}
+    tags                                     = {
+      "terraform" = "true"
+    }
+    tags_all                                 = {
+      "terraform" = "true"
+    }
 }
