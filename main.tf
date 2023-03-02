@@ -256,7 +256,7 @@ actions_enabled           = true
     treat_missing_data        = "missing"
 }
 
-resource "aws_cloudwatch_metric_alarm" "Errors" {
+resource "aws_cloudwatch_metric_alarm" "houseErrors" {
     actions_enabled           = true
     alarm_actions             = [
         "arn:aws:sns:us-east-1:667259643039:HueristicEinstein",
